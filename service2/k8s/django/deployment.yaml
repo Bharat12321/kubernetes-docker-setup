@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-s2
+  labels:
+    app: django-s2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: django-s2
+  template:
+    metadata:
+      labels:
+        pod: django-s2
+    spec:
+      containers:
+        - name: django-s2
+          image: bharat12321/demo4-service2:1.0.2
+          ports:
+            - containerPort: 8003
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+
+            - name: POSTGRES_HOST
+              value: postgres-service
+
+            - name: REDIS_HOST
+              value: redis-service

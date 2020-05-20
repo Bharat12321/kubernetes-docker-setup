@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: minikube-ingress
+spec:
+  rules:
+  - host: minikube.local
+    http:
+      paths:
+      - path: /v3/
+        backend:
+          serviceName: django-service3
+          servicePort: 8000
+      - path: /admin/
+        backend:
+          serviceName: django-service3
+          servicePort: 8000
+      - path: /static/
+        backend:
+          serviceName: django-service3
+          servicePort: 8000
+      - path: /v1/
+        backend:
+          serviceName: django-service1
+          servicePort: 8001
+      - path: /v2/
+        backend:
+          serviceName: django-service2
+          servicePort: 8003

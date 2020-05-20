@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: django-service2
+spec:
+  selector:
+    pod: django-s2
+  ports:
+  - protocol: TCP
+    port: 8003
+    targetPort: 8003
+  type: NodePort
